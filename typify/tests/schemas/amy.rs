@@ -109,232 +109,37 @@ pub mod error {
 #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
 #[serde(untagged)]
 pub enum MyStruct {
-    Variant0(MyStructVariant0),
-    Variant1(MyStructVariant1),
+    Variant0 {
+        myfirsttag: MyStructVariant0Myfirsttag,
+        mysecondtag: MyStructVariant0Mysecondtag,
+    },
+    Variant1 {
+        myfirsttag: MyStructVariant1Myfirsttag,
+        mysecondtag: MyStructVariant1Mysecondtag,
+    },
+    Variant2 {
+        myfirsttag: MyStructVariant2Myfirsttag,
+        mysecondtag: MyStructVariant2Mysecondtag,
+    },
+    Variant3 {
+        myfirsttag: MyStructVariant3Myfirsttag,
+        mysecondtag: MyStructVariant3Mysecondtag,
+    },
 }
 impl ::std::convert::From<&Self> for MyStruct {
     fn from(value: &MyStruct) -> Self {
         value.clone()
     }
 }
-impl ::std::convert::From<MyStructVariant0> for MyStruct {
-    fn from(value: MyStructVariant0) -> Self {
-        Self::Variant0(value)
-    }
-}
-impl ::std::convert::From<MyStructVariant1> for MyStruct {
-    fn from(value: MyStructVariant1) -> Self {
-        Self::Variant1(value)
-    }
-}
-#[doc = "`MyStructVariant0`"]
+#[doc = "`MyStructVariant0Myfirsttag`"]
 #[doc = r""]
 #[doc = r" <details><summary>JSON schema</summary>"]
 #[doc = r""]
 #[doc = r" ```json"]
 #[doc = "{"]
-#[doc = "  \"allOf\": ["]
-#[doc = "    {"]
-#[doc = "      \"oneOf\": ["]
-#[doc = "        {"]
-#[doc = "          \"type\": \"object\","]
-#[doc = "          \"required\": ["]
-#[doc = "            \"myfirsttag\""]
-#[doc = "          ],"]
-#[doc = "          \"properties\": {"]
-#[doc = "            \"myfirsttag\": {"]
-#[doc = "              \"type\": \"string\","]
-#[doc = "              \"enum\": ["]
-#[doc = "                \"a\""]
-#[doc = "              ]"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        },"]
-#[doc = "        {"]
-#[doc = "          \"type\": \"object\","]
-#[doc = "          \"format\": \"uint64\","]
-#[doc = "          \"minimum\": 0.0,"]
-#[doc = "          \"required\": ["]
-#[doc = "            \"myfirsttag\""]
-#[doc = "          ],"]
-#[doc = "          \"properties\": {"]
-#[doc = "            \"myfirsttag\": {"]
-#[doc = "              \"type\": \"string\","]
-#[doc = "              \"enum\": ["]
-#[doc = "                \"b\""]
-#[doc = "              ]"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        }"]
-#[doc = "      ]"]
-#[doc = "    },"]
-#[doc = "    {"]
-#[doc = "      \"type\": \"object\","]
-#[doc = "      \"required\": ["]
-#[doc = "        \"mysecondtag\""]
-#[doc = "      ],"]
-#[doc = "      \"properties\": {"]
-#[doc = "        \"mysecondtag\": {"]
-#[doc = "          \"type\": \"string\","]
-#[doc = "          \"enum\": ["]
-#[doc = "            \"c\""]
-#[doc = "          ]"]
-#[doc = "        }"]
-#[doc = "      }"]
-#[doc = "    },"]
-#[doc = "    {"]
-#[doc = "      \"not\": {"]
-#[doc = "        \"type\": \"object\","]
-#[doc = "        \"format\": \"uint64\","]
-#[doc = "        \"minimum\": 0.0,"]
-#[doc = "        \"required\": ["]
-#[doc = "          \"mysecondtag\""]
-#[doc = "        ],"]
-#[doc = "        \"properties\": {"]
-#[doc = "          \"mysecondtag\": {"]
-#[doc = "            \"type\": \"string\","]
-#[doc = "            \"enum\": ["]
-#[doc = "              \"d\""]
-#[doc = "            ]"]
-#[doc = "          }"]
-#[doc = "        }"]
-#[doc = "      }"]
-#[doc = "    }"]
-#[doc = "  ]"]
-#[doc = "}"]
-#[doc = r" ```"]
-#[doc = r" </details>"]
-#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-#[serde(untagged)]
-pub enum MyStructVariant0 {
-    Variant0(MyStructVariant0Variant0),
-    Variant1(MyStructVariant0Variant1),
-}
-impl ::std::convert::From<&Self> for MyStructVariant0 {
-    fn from(value: &MyStructVariant0) -> Self {
-        value.clone()
-    }
-}
-impl ::std::convert::From<MyStructVariant0Variant0> for MyStructVariant0 {
-    fn from(value: MyStructVariant0Variant0) -> Self {
-        Self::Variant0(value)
-    }
-}
-impl ::std::convert::From<MyStructVariant0Variant1> for MyStructVariant0 {
-    fn from(value: MyStructVariant0Variant1) -> Self {
-        Self::Variant1(value)
-    }
-}
-#[doc = "`MyStructVariant0Variant0`"]
-#[doc = r""]
-#[doc = r" <details><summary>JSON schema</summary>"]
-#[doc = r""]
-#[doc = r" ```json"]
-#[doc = "{"]
-#[doc = "  \"allOf\": ["]
-#[doc = "    {},"]
-#[doc = "    {"]
-#[doc = "      \"allOf\": ["]
-#[doc = "        {"]
-#[doc = "          \"type\": \"object\","]
-#[doc = "          \"required\": ["]
-#[doc = "            \"mysecondtag\""]
-#[doc = "          ],"]
-#[doc = "          \"properties\": {"]
-#[doc = "            \"mysecondtag\": {"]
-#[doc = "              \"type\": \"string\","]
-#[doc = "              \"enum\": ["]
-#[doc = "                \"c\""]
-#[doc = "              ]"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        },"]
-#[doc = "        {"]
-#[doc = "          \"type\": \"object\","]
-#[doc = "          \"required\": ["]
-#[doc = "            \"myfirsttag\""]
-#[doc = "          ],"]
-#[doc = "          \"properties\": {"]
-#[doc = "            \"myfirsttag\": {"]
-#[doc = "              \"type\": \"string\","]
-#[doc = "              \"enum\": ["]
-#[doc = "                \"a\""]
-#[doc = "              ]"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        },"]
-#[doc = "        {"]
-#[doc = "          \"not\": {"]
-#[doc = "            \"type\": \"object\","]
-#[doc = "            \"format\": \"uint64\","]
-#[doc = "            \"minimum\": 0.0,"]
-#[doc = "            \"required\": ["]
-#[doc = "              \"myfirsttag\""]
-#[doc = "            ],"]
-#[doc = "            \"properties\": {"]
-#[doc = "              \"myfirsttag\": {"]
-#[doc = "                \"type\": \"string\","]
-#[doc = "                \"enum\": ["]
-#[doc = "                  \"b\""]
-#[doc = "                ]"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        }"]
-#[doc = "      ]"]
-#[doc = "    },"]
-#[doc = "    {"]
-#[doc = "      \"not\": {"]
-#[doc = "        \"allOf\": ["]
-#[doc = "          {"]
-#[doc = "            \"type\": \"object\","]
-#[doc = "            \"required\": ["]
-#[doc = "              \"mysecondtag\""]
-#[doc = "            ],"]
-#[doc = "            \"properties\": {"]
-#[doc = "              \"mysecondtag\": {"]
-#[doc = "                \"type\": \"string\","]
-#[doc = "                \"enum\": ["]
-#[doc = "                  \"c\""]
-#[doc = "                ]"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          },"]
-#[doc = "          {"]
-#[doc = "            \"type\": \"object\","]
-#[doc = "            \"format\": \"uint64\","]
-#[doc = "            \"minimum\": 0.0,"]
-#[doc = "            \"required\": ["]
-#[doc = "              \"myfirsttag\""]
-#[doc = "            ],"]
-#[doc = "            \"properties\": {"]
-#[doc = "              \"myfirsttag\": {"]
-#[doc = "                \"type\": \"string\","]
-#[doc = "                \"enum\": ["]
-#[doc = "                  \"b\""]
-#[doc = "                ]"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          },"]
-#[doc = "          {"]
-#[doc = "            \"not\": {"]
-#[doc = "              \"type\": \"object\","]
-#[doc = "              \"required\": ["]
-#[doc = "                \"myfirsttag\""]
-#[doc = "              ],"]
-#[doc = "              \"properties\": {"]
-#[doc = "                \"myfirsttag\": {"]
-#[doc = "                  \"type\": \"string\","]
-#[doc = "                  \"enum\": ["]
-#[doc = "                    \"a\""]
-#[doc = "                  ]"]
-#[doc = "                }"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        ]"]
-#[doc = "      }"]
-#[doc = "    }"]
+#[doc = "  \"type\": \"string\","]
+#[doc = "  \"enum\": ["]
+#[doc = "    \"a\""]
 #[doc = "  ]"]
 #[doc = "}"]
 #[doc = r" ```"]
@@ -351,123 +156,62 @@ impl ::std::convert::From<MyStructVariant0Variant1> for MyStructVariant0 {
     PartialEq,
     PartialOrd,
 )]
-#[serde(deny_unknown_fields)]
-pub enum MyStructVariant0Variant0 {}
-impl ::std::convert::From<&Self> for MyStructVariant0Variant0 {
-    fn from(value: &MyStructVariant0Variant0) -> Self {
+pub enum MyStructVariant0Myfirsttag {
+    #[serde(rename = "a")]
+    A,
+}
+impl ::std::convert::From<&Self> for MyStructVariant0Myfirsttag {
+    fn from(value: &MyStructVariant0Myfirsttag) -> Self {
         value.clone()
     }
 }
-#[doc = "`MyStructVariant0Variant1`"]
+impl ::std::fmt::Display for MyStructVariant0Myfirsttag {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::A => f.write_str("a"),
+        }
+    }
+}
+impl ::std::str::FromStr for MyStructVariant0Myfirsttag {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "a" => Ok(Self::A),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for MyStructVariant0Myfirsttag {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<&::std::string::String> for MyStructVariant0Myfirsttag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: &::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for MyStructVariant0Myfirsttag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+#[doc = "`MyStructVariant0Mysecondtag`"]
 #[doc = r""]
 #[doc = r" <details><summary>JSON schema</summary>"]
 #[doc = r""]
 #[doc = r" ```json"]
 #[doc = "{"]
-#[doc = "  \"allOf\": ["]
-#[doc = "    {},"]
-#[doc = "    {"]
-#[doc = "      \"allOf\": ["]
-#[doc = "        {"]
-#[doc = "          \"type\": \"object\","]
-#[doc = "          \"required\": ["]
-#[doc = "            \"mysecondtag\""]
-#[doc = "          ],"]
-#[doc = "          \"properties\": {"]
-#[doc = "            \"mysecondtag\": {"]
-#[doc = "              \"type\": \"string\","]
-#[doc = "              \"enum\": ["]
-#[doc = "                \"c\""]
-#[doc = "              ]"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        },"]
-#[doc = "        {"]
-#[doc = "          \"type\": \"object\","]
-#[doc = "          \"format\": \"uint64\","]
-#[doc = "          \"minimum\": 0.0,"]
-#[doc = "          \"required\": ["]
-#[doc = "            \"myfirsttag\""]
-#[doc = "          ],"]
-#[doc = "          \"properties\": {"]
-#[doc = "            \"myfirsttag\": {"]
-#[doc = "              \"type\": \"string\","]
-#[doc = "              \"enum\": ["]
-#[doc = "                \"b\""]
-#[doc = "              ]"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        },"]
-#[doc = "        {"]
-#[doc = "          \"not\": {"]
-#[doc = "            \"type\": \"object\","]
-#[doc = "            \"required\": ["]
-#[doc = "              \"myfirsttag\""]
-#[doc = "            ],"]
-#[doc = "            \"properties\": {"]
-#[doc = "              \"myfirsttag\": {"]
-#[doc = "                \"type\": \"string\","]
-#[doc = "                \"enum\": ["]
-#[doc = "                  \"a\""]
-#[doc = "                ]"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        }"]
-#[doc = "      ]"]
-#[doc = "    },"]
-#[doc = "    {"]
-#[doc = "      \"not\": {"]
-#[doc = "        \"allOf\": ["]
-#[doc = "          {"]
-#[doc = "            \"type\": \"object\","]
-#[doc = "            \"required\": ["]
-#[doc = "              \"mysecondtag\""]
-#[doc = "            ],"]
-#[doc = "            \"properties\": {"]
-#[doc = "              \"mysecondtag\": {"]
-#[doc = "                \"type\": \"string\","]
-#[doc = "                \"enum\": ["]
-#[doc = "                  \"c\""]
-#[doc = "                ]"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          },"]
-#[doc = "          {"]
-#[doc = "            \"type\": \"object\","]
-#[doc = "            \"required\": ["]
-#[doc = "              \"myfirsttag\""]
-#[doc = "            ],"]
-#[doc = "            \"properties\": {"]
-#[doc = "              \"myfirsttag\": {"]
-#[doc = "                \"type\": \"string\","]
-#[doc = "                \"enum\": ["]
-#[doc = "                  \"a\""]
-#[doc = "                ]"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          },"]
-#[doc = "          {"]
-#[doc = "            \"not\": {"]
-#[doc = "              \"type\": \"object\","]
-#[doc = "              \"format\": \"uint64\","]
-#[doc = "              \"minimum\": 0.0,"]
-#[doc = "              \"required\": ["]
-#[doc = "                \"myfirsttag\""]
-#[doc = "              ],"]
-#[doc = "              \"properties\": {"]
-#[doc = "                \"myfirsttag\": {"]
-#[doc = "                  \"type\": \"string\","]
-#[doc = "                  \"enum\": ["]
-#[doc = "                    \"b\""]
-#[doc = "                  ]"]
-#[doc = "                }"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        ]"]
-#[doc = "      }"]
-#[doc = "    }"]
+#[doc = "  \"type\": \"string\","]
+#[doc = "  \"enum\": ["]
+#[doc = "    \"c\""]
 #[doc = "  ]"]
 #[doc = "}"]
 #[doc = r" ```"]
@@ -484,225 +228,62 @@ impl ::std::convert::From<&Self> for MyStructVariant0Variant0 {
     PartialEq,
     PartialOrd,
 )]
-#[serde(deny_unknown_fields)]
-pub enum MyStructVariant0Variant1 {}
-impl ::std::convert::From<&Self> for MyStructVariant0Variant1 {
-    fn from(value: &MyStructVariant0Variant1) -> Self {
+pub enum MyStructVariant0Mysecondtag {
+    #[serde(rename = "c")]
+    C,
+}
+impl ::std::convert::From<&Self> for MyStructVariant0Mysecondtag {
+    fn from(value: &MyStructVariant0Mysecondtag) -> Self {
         value.clone()
     }
 }
-#[doc = "`MyStructVariant1`"]
+impl ::std::fmt::Display for MyStructVariant0Mysecondtag {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::C => f.write_str("c"),
+        }
+    }
+}
+impl ::std::str::FromStr for MyStructVariant0Mysecondtag {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "c" => Ok(Self::C),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for MyStructVariant0Mysecondtag {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<&::std::string::String> for MyStructVariant0Mysecondtag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: &::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for MyStructVariant0Mysecondtag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+#[doc = "`MyStructVariant1Myfirsttag`"]
 #[doc = r""]
 #[doc = r" <details><summary>JSON schema</summary>"]
 #[doc = r""]
 #[doc = r" ```json"]
 #[doc = "{"]
-#[doc = "  \"allOf\": ["]
-#[doc = "    {"]
-#[doc = "      \"oneOf\": ["]
-#[doc = "        {"]
-#[doc = "          \"type\": \"object\","]
-#[doc = "          \"required\": ["]
-#[doc = "            \"myfirsttag\""]
-#[doc = "          ],"]
-#[doc = "          \"properties\": {"]
-#[doc = "            \"myfirsttag\": {"]
-#[doc = "              \"type\": \"string\","]
-#[doc = "              \"enum\": ["]
-#[doc = "                \"a\""]
-#[doc = "              ]"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        },"]
-#[doc = "        {"]
-#[doc = "          \"type\": \"object\","]
-#[doc = "          \"format\": \"uint64\","]
-#[doc = "          \"minimum\": 0.0,"]
-#[doc = "          \"required\": ["]
-#[doc = "            \"myfirsttag\""]
-#[doc = "          ],"]
-#[doc = "          \"properties\": {"]
-#[doc = "            \"myfirsttag\": {"]
-#[doc = "              \"type\": \"string\","]
-#[doc = "              \"enum\": ["]
-#[doc = "                \"b\""]
-#[doc = "              ]"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        }"]
-#[doc = "      ]"]
-#[doc = "    },"]
-#[doc = "    {"]
-#[doc = "      \"type\": \"object\","]
-#[doc = "      \"format\": \"uint64\","]
-#[doc = "      \"minimum\": 0.0,"]
-#[doc = "      \"required\": ["]
-#[doc = "        \"mysecondtag\""]
-#[doc = "      ],"]
-#[doc = "      \"properties\": {"]
-#[doc = "        \"mysecondtag\": {"]
-#[doc = "          \"type\": \"string\","]
-#[doc = "          \"enum\": ["]
-#[doc = "            \"d\""]
-#[doc = "          ]"]
-#[doc = "        }"]
-#[doc = "      }"]
-#[doc = "    },"]
-#[doc = "    {"]
-#[doc = "      \"not\": {"]
-#[doc = "        \"type\": \"object\","]
-#[doc = "        \"required\": ["]
-#[doc = "          \"mysecondtag\""]
-#[doc = "        ],"]
-#[doc = "        \"properties\": {"]
-#[doc = "          \"mysecondtag\": {"]
-#[doc = "            \"type\": \"string\","]
-#[doc = "            \"enum\": ["]
-#[doc = "              \"c\""]
-#[doc = "            ]"]
-#[doc = "          }"]
-#[doc = "        }"]
-#[doc = "      }"]
-#[doc = "    }"]
-#[doc = "  ]"]
-#[doc = "}"]
-#[doc = r" ```"]
-#[doc = r" </details>"]
-#[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-#[serde(untagged)]
-pub enum MyStructVariant1 {
-    Variant0(MyStructVariant1Variant0),
-    Variant1(MyStructVariant1Variant1),
-}
-impl ::std::convert::From<&Self> for MyStructVariant1 {
-    fn from(value: &MyStructVariant1) -> Self {
-        value.clone()
-    }
-}
-impl ::std::convert::From<MyStructVariant1Variant0> for MyStructVariant1 {
-    fn from(value: MyStructVariant1Variant0) -> Self {
-        Self::Variant0(value)
-    }
-}
-impl ::std::convert::From<MyStructVariant1Variant1> for MyStructVariant1 {
-    fn from(value: MyStructVariant1Variant1) -> Self {
-        Self::Variant1(value)
-    }
-}
-#[doc = "`MyStructVariant1Variant0`"]
-#[doc = r""]
-#[doc = r" <details><summary>JSON schema</summary>"]
-#[doc = r""]
-#[doc = r" ```json"]
-#[doc = "{"]
-#[doc = "  \"allOf\": ["]
-#[doc = "    {},"]
-#[doc = "    {"]
-#[doc = "      \"allOf\": ["]
-#[doc = "        {"]
-#[doc = "          \"type\": \"object\","]
-#[doc = "          \"format\": \"uint64\","]
-#[doc = "          \"minimum\": 0.0,"]
-#[doc = "          \"required\": ["]
-#[doc = "            \"mysecondtag\""]
-#[doc = "          ],"]
-#[doc = "          \"properties\": {"]
-#[doc = "            \"mysecondtag\": {"]
-#[doc = "              \"type\": \"string\","]
-#[doc = "              \"enum\": ["]
-#[doc = "                \"d\""]
-#[doc = "              ]"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        },"]
-#[doc = "        {"]
-#[doc = "          \"type\": \"object\","]
-#[doc = "          \"required\": ["]
-#[doc = "            \"myfirsttag\""]
-#[doc = "          ],"]
-#[doc = "          \"properties\": {"]
-#[doc = "            \"myfirsttag\": {"]
-#[doc = "              \"type\": \"string\","]
-#[doc = "              \"enum\": ["]
-#[doc = "                \"a\""]
-#[doc = "              ]"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        },"]
-#[doc = "        {"]
-#[doc = "          \"not\": {"]
-#[doc = "            \"type\": \"object\","]
-#[doc = "            \"format\": \"uint64\","]
-#[doc = "            \"minimum\": 0.0,"]
-#[doc = "            \"required\": ["]
-#[doc = "              \"myfirsttag\""]
-#[doc = "            ],"]
-#[doc = "            \"properties\": {"]
-#[doc = "              \"myfirsttag\": {"]
-#[doc = "                \"type\": \"string\","]
-#[doc = "                \"enum\": ["]
-#[doc = "                  \"b\""]
-#[doc = "                ]"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        }"]
-#[doc = "      ]"]
-#[doc = "    },"]
-#[doc = "    {"]
-#[doc = "      \"not\": {"]
-#[doc = "        \"allOf\": ["]
-#[doc = "          {"]
-#[doc = "            \"type\": \"object\","]
-#[doc = "            \"format\": \"uint64\","]
-#[doc = "            \"minimum\": 0.0,"]
-#[doc = "            \"required\": ["]
-#[doc = "              \"mysecondtag\""]
-#[doc = "            ],"]
-#[doc = "            \"properties\": {"]
-#[doc = "              \"mysecondtag\": {"]
-#[doc = "                \"type\": \"string\","]
-#[doc = "                \"enum\": ["]
-#[doc = "                  \"d\""]
-#[doc = "                ]"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          },"]
-#[doc = "          {"]
-#[doc = "            \"type\": \"object\","]
-#[doc = "            \"format\": \"uint64\","]
-#[doc = "            \"minimum\": 0.0,"]
-#[doc = "            \"required\": ["]
-#[doc = "              \"myfirsttag\""]
-#[doc = "            ],"]
-#[doc = "            \"properties\": {"]
-#[doc = "              \"myfirsttag\": {"]
-#[doc = "                \"type\": \"string\","]
-#[doc = "                \"enum\": ["]
-#[doc = "                  \"b\""]
-#[doc = "                ]"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          },"]
-#[doc = "          {"]
-#[doc = "            \"not\": {"]
-#[doc = "              \"type\": \"object\","]
-#[doc = "              \"required\": ["]
-#[doc = "                \"myfirsttag\""]
-#[doc = "              ],"]
-#[doc = "              \"properties\": {"]
-#[doc = "                \"myfirsttag\": {"]
-#[doc = "                  \"type\": \"string\","]
-#[doc = "                  \"enum\": ["]
-#[doc = "                    \"a\""]
-#[doc = "                  ]"]
-#[doc = "                }"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        ]"]
-#[doc = "      }"]
-#[doc = "    }"]
+#[doc = "  \"type\": \"string\","]
+#[doc = "  \"enum\": ["]
+#[doc = "    \"a\""]
 #[doc = "  ]"]
 #[doc = "}"]
 #[doc = r" ```"]
@@ -719,127 +300,62 @@ impl ::std::convert::From<MyStructVariant1Variant1> for MyStructVariant1 {
     PartialEq,
     PartialOrd,
 )]
-#[serde(deny_unknown_fields)]
-pub enum MyStructVariant1Variant0 {}
-impl ::std::convert::From<&Self> for MyStructVariant1Variant0 {
-    fn from(value: &MyStructVariant1Variant0) -> Self {
+pub enum MyStructVariant1Myfirsttag {
+    #[serde(rename = "a")]
+    A,
+}
+impl ::std::convert::From<&Self> for MyStructVariant1Myfirsttag {
+    fn from(value: &MyStructVariant1Myfirsttag) -> Self {
         value.clone()
     }
 }
-#[doc = "`MyStructVariant1Variant1`"]
+impl ::std::fmt::Display for MyStructVariant1Myfirsttag {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::A => f.write_str("a"),
+        }
+    }
+}
+impl ::std::str::FromStr for MyStructVariant1Myfirsttag {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "a" => Ok(Self::A),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for MyStructVariant1Myfirsttag {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<&::std::string::String> for MyStructVariant1Myfirsttag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: &::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for MyStructVariant1Myfirsttag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+#[doc = "`MyStructVariant1Mysecondtag`"]
 #[doc = r""]
 #[doc = r" <details><summary>JSON schema</summary>"]
 #[doc = r""]
 #[doc = r" ```json"]
 #[doc = "{"]
-#[doc = "  \"allOf\": ["]
-#[doc = "    {},"]
-#[doc = "    {"]
-#[doc = "      \"allOf\": ["]
-#[doc = "        {"]
-#[doc = "          \"type\": \"object\","]
-#[doc = "          \"format\": \"uint64\","]
-#[doc = "          \"minimum\": 0.0,"]
-#[doc = "          \"required\": ["]
-#[doc = "            \"mysecondtag\""]
-#[doc = "          ],"]
-#[doc = "          \"properties\": {"]
-#[doc = "            \"mysecondtag\": {"]
-#[doc = "              \"type\": \"string\","]
-#[doc = "              \"enum\": ["]
-#[doc = "                \"d\""]
-#[doc = "              ]"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        },"]
-#[doc = "        {"]
-#[doc = "          \"type\": \"object\","]
-#[doc = "          \"format\": \"uint64\","]
-#[doc = "          \"minimum\": 0.0,"]
-#[doc = "          \"required\": ["]
-#[doc = "            \"myfirsttag\""]
-#[doc = "          ],"]
-#[doc = "          \"properties\": {"]
-#[doc = "            \"myfirsttag\": {"]
-#[doc = "              \"type\": \"string\","]
-#[doc = "              \"enum\": ["]
-#[doc = "                \"b\""]
-#[doc = "              ]"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        },"]
-#[doc = "        {"]
-#[doc = "          \"not\": {"]
-#[doc = "            \"type\": \"object\","]
-#[doc = "            \"required\": ["]
-#[doc = "              \"myfirsttag\""]
-#[doc = "            ],"]
-#[doc = "            \"properties\": {"]
-#[doc = "              \"myfirsttag\": {"]
-#[doc = "                \"type\": \"string\","]
-#[doc = "                \"enum\": ["]
-#[doc = "                  \"a\""]
-#[doc = "                ]"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        }"]
-#[doc = "      ]"]
-#[doc = "    },"]
-#[doc = "    {"]
-#[doc = "      \"not\": {"]
-#[doc = "        \"allOf\": ["]
-#[doc = "          {"]
-#[doc = "            \"type\": \"object\","]
-#[doc = "            \"format\": \"uint64\","]
-#[doc = "            \"minimum\": 0.0,"]
-#[doc = "            \"required\": ["]
-#[doc = "              \"mysecondtag\""]
-#[doc = "            ],"]
-#[doc = "            \"properties\": {"]
-#[doc = "              \"mysecondtag\": {"]
-#[doc = "                \"type\": \"string\","]
-#[doc = "                \"enum\": ["]
-#[doc = "                  \"d\""]
-#[doc = "                ]"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          },"]
-#[doc = "          {"]
-#[doc = "            \"type\": \"object\","]
-#[doc = "            \"required\": ["]
-#[doc = "              \"myfirsttag\""]
-#[doc = "            ],"]
-#[doc = "            \"properties\": {"]
-#[doc = "              \"myfirsttag\": {"]
-#[doc = "                \"type\": \"string\","]
-#[doc = "                \"enum\": ["]
-#[doc = "                  \"a\""]
-#[doc = "                ]"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          },"]
-#[doc = "          {"]
-#[doc = "            \"not\": {"]
-#[doc = "              \"type\": \"object\","]
-#[doc = "              \"format\": \"uint64\","]
-#[doc = "              \"minimum\": 0.0,"]
-#[doc = "              \"required\": ["]
-#[doc = "                \"myfirsttag\""]
-#[doc = "              ],"]
-#[doc = "              \"properties\": {"]
-#[doc = "                \"myfirsttag\": {"]
-#[doc = "                  \"type\": \"string\","]
-#[doc = "                  \"enum\": ["]
-#[doc = "                    \"b\""]
-#[doc = "                  ]"]
-#[doc = "                }"]
-#[doc = "              }"]
-#[doc = "            }"]
-#[doc = "          }"]
-#[doc = "        ]"]
-#[doc = "      }"]
-#[doc = "    }"]
+#[doc = "  \"type\": \"string\","]
+#[doc = "  \"enum\": ["]
+#[doc = "    \"d\""]
 #[doc = "  ]"]
 #[doc = "}"]
 #[doc = r" ```"]
@@ -856,11 +372,339 @@ impl ::std::convert::From<&Self> for MyStructVariant1Variant0 {
     PartialEq,
     PartialOrd,
 )]
-#[serde(deny_unknown_fields)]
-pub enum MyStructVariant1Variant1 {}
-impl ::std::convert::From<&Self> for MyStructVariant1Variant1 {
-    fn from(value: &MyStructVariant1Variant1) -> Self {
+pub enum MyStructVariant1Mysecondtag {
+    #[serde(rename = "d")]
+    D,
+}
+impl ::std::convert::From<&Self> for MyStructVariant1Mysecondtag {
+    fn from(value: &MyStructVariant1Mysecondtag) -> Self {
         value.clone()
+    }
+}
+impl ::std::fmt::Display for MyStructVariant1Mysecondtag {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::D => f.write_str("d"),
+        }
+    }
+}
+impl ::std::str::FromStr for MyStructVariant1Mysecondtag {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "d" => Ok(Self::D),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for MyStructVariant1Mysecondtag {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<&::std::string::String> for MyStructVariant1Mysecondtag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: &::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for MyStructVariant1Mysecondtag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+#[doc = "`MyStructVariant2Myfirsttag`"]
+#[doc = r""]
+#[doc = r" <details><summary>JSON schema</summary>"]
+#[doc = r""]
+#[doc = r" ```json"]
+#[doc = "{"]
+#[doc = "  \"type\": \"string\","]
+#[doc = "  \"enum\": ["]
+#[doc = "    \"b\""]
+#[doc = "  ]"]
+#[doc = "}"]
+#[doc = r" ```"]
+#[doc = r" </details>"]
+#[derive(
+    :: serde :: Deserialize,
+    :: serde :: Serialize,
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+)]
+pub enum MyStructVariant2Myfirsttag {
+    #[serde(rename = "b")]
+    B,
+}
+impl ::std::convert::From<&Self> for MyStructVariant2Myfirsttag {
+    fn from(value: &MyStructVariant2Myfirsttag) -> Self {
+        value.clone()
+    }
+}
+impl ::std::fmt::Display for MyStructVariant2Myfirsttag {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::B => f.write_str("b"),
+        }
+    }
+}
+impl ::std::str::FromStr for MyStructVariant2Myfirsttag {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "b" => Ok(Self::B),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for MyStructVariant2Myfirsttag {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<&::std::string::String> for MyStructVariant2Myfirsttag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: &::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for MyStructVariant2Myfirsttag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+#[doc = "`MyStructVariant2Mysecondtag`"]
+#[doc = r""]
+#[doc = r" <details><summary>JSON schema</summary>"]
+#[doc = r""]
+#[doc = r" ```json"]
+#[doc = "{"]
+#[doc = "  \"type\": \"string\","]
+#[doc = "  \"enum\": ["]
+#[doc = "    \"c\""]
+#[doc = "  ]"]
+#[doc = "}"]
+#[doc = r" ```"]
+#[doc = r" </details>"]
+#[derive(
+    :: serde :: Deserialize,
+    :: serde :: Serialize,
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+)]
+pub enum MyStructVariant2Mysecondtag {
+    #[serde(rename = "c")]
+    C,
+}
+impl ::std::convert::From<&Self> for MyStructVariant2Mysecondtag {
+    fn from(value: &MyStructVariant2Mysecondtag) -> Self {
+        value.clone()
+    }
+}
+impl ::std::fmt::Display for MyStructVariant2Mysecondtag {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::C => f.write_str("c"),
+        }
+    }
+}
+impl ::std::str::FromStr for MyStructVariant2Mysecondtag {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "c" => Ok(Self::C),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for MyStructVariant2Mysecondtag {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<&::std::string::String> for MyStructVariant2Mysecondtag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: &::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for MyStructVariant2Mysecondtag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+#[doc = "`MyStructVariant3Myfirsttag`"]
+#[doc = r""]
+#[doc = r" <details><summary>JSON schema</summary>"]
+#[doc = r""]
+#[doc = r" ```json"]
+#[doc = "{"]
+#[doc = "  \"type\": \"string\","]
+#[doc = "  \"enum\": ["]
+#[doc = "    \"b\""]
+#[doc = "  ]"]
+#[doc = "}"]
+#[doc = r" ```"]
+#[doc = r" </details>"]
+#[derive(
+    :: serde :: Deserialize,
+    :: serde :: Serialize,
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+)]
+pub enum MyStructVariant3Myfirsttag {
+    #[serde(rename = "b")]
+    B,
+}
+impl ::std::convert::From<&Self> for MyStructVariant3Myfirsttag {
+    fn from(value: &MyStructVariant3Myfirsttag) -> Self {
+        value.clone()
+    }
+}
+impl ::std::fmt::Display for MyStructVariant3Myfirsttag {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::B => f.write_str("b"),
+        }
+    }
+}
+impl ::std::str::FromStr for MyStructVariant3Myfirsttag {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "b" => Ok(Self::B),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for MyStructVariant3Myfirsttag {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<&::std::string::String> for MyStructVariant3Myfirsttag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: &::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for MyStructVariant3Myfirsttag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+#[doc = "`MyStructVariant3Mysecondtag`"]
+#[doc = r""]
+#[doc = r" <details><summary>JSON schema</summary>"]
+#[doc = r""]
+#[doc = r" ```json"]
+#[doc = "{"]
+#[doc = "  \"type\": \"string\","]
+#[doc = "  \"enum\": ["]
+#[doc = "    \"d\""]
+#[doc = "  ]"]
+#[doc = "}"]
+#[doc = r" ```"]
+#[doc = r" </details>"]
+#[derive(
+    :: serde :: Deserialize,
+    :: serde :: Serialize,
+    Clone,
+    Copy,
+    Debug,
+    Eq,
+    Hash,
+    Ord,
+    PartialEq,
+    PartialOrd,
+)]
+pub enum MyStructVariant3Mysecondtag {
+    #[serde(rename = "d")]
+    D,
+}
+impl ::std::convert::From<&Self> for MyStructVariant3Mysecondtag {
+    fn from(value: &MyStructVariant3Mysecondtag) -> Self {
+        value.clone()
+    }
+}
+impl ::std::fmt::Display for MyStructVariant3Mysecondtag {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        match *self {
+            Self::D => f.write_str("d"),
+        }
+    }
+}
+impl ::std::str::FromStr for MyStructVariant3Mysecondtag {
+    type Err = self::error::ConversionError;
+    fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        match value {
+            "d" => Ok(Self::D),
+            _ => Err("invalid value".into()),
+        }
+    }
+}
+impl ::std::convert::TryFrom<&str> for MyStructVariant3Mysecondtag {
+    type Error = self::error::ConversionError;
+    fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<&::std::string::String> for MyStructVariant3Mysecondtag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: &::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
+    }
+}
+impl ::std::convert::TryFrom<::std::string::String> for MyStructVariant3Mysecondtag {
+    type Error = self::error::ConversionError;
+    fn try_from(
+        value: ::std::string::String,
+    ) -> ::std::result::Result<Self, self::error::ConversionError> {
+        value.parse()
     }
 }
 fn main() {}

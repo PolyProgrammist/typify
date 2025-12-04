@@ -13,6 +13,75 @@ use schemars::schema::{
 
 use crate::{util::ref_key, validate::schema_value_validate, RefKey};
 
+/// Clean up validation that is irrelevant for the determined instance type.
+/// For example, if the type is definitively "object", we remove numeric
+/// validation since it doesn't apply.
+fn cleanup_irrelevant_validation(
+    instance_type: Option<&SingleOrVec<InstanceType>>,
+    format: Option<String>,
+    number: Option<Box<NumberValidation>>,
+    string: Option<Box<StringValidation>>,
+    array: Option<Box<ArrayValidation>>,
+    object: Option<Box<ObjectValidation>>,
+) -> (
+    Option<String>,
+    Option<Box<NumberValidation>>,
+    Option<Box<StringValidation>>,
+    Option<Box<ArrayValidation>>,
+    Option<Box<ObjectValidation>>,
+) {
+    // If we have a single, definite instance type, remove irrelevant validation
+    let single_type = match instance_type {
+        Some(SingleOrVec::Single(t)) => Some(t.as_ref()),
+        _ => None,
+    };
+
+    match single_type {
+        Some(InstanceType::Object) => {
+            // For objects, remove numeric/string/array validation and numeric formats
+            let clean_format = format.filter(|f| !is_numeric_format(f));
+            (clean_format, None, None, None, object)
+        }
+        Some(InstanceType::Array) => {
+            // For arrays, remove numeric/string/object validation
+            let clean_format = format.filter(|f| !is_numeric_format(f));
+            (clean_format, None, None, array, None)
+        }
+        Some(InstanceType::String) => {
+            // For strings, remove numeric/array/object validation
+            let clean_format = format.filter(|f| !is_numeric_format(f));
+            (clean_format, None, string, None, None)
+        }
+        Some(InstanceType::Integer) | Some(InstanceType::Number) => {
+            // For numbers, remove string/array/object validation
+            (format, number, None, None, None)
+        }
+        _ => {
+            // Multiple types or unknown - keep everything
+            (format, number, string, array, object)
+        }
+    }
+}
+
+/// Check if a format string is a numeric format
+fn is_numeric_format(format: &str) -> bool {
+    matches!(
+        format,
+        "int8"
+            | "int16"
+            | "int32"
+            | "int64"
+            | "int128"
+            | "uint8"
+            | "uint16"
+            | "uint32"
+            | "uint64"
+            | "uint128"
+            | "float"
+            | "double"
+    )
+}
+
 /// Merge all schemas in array of schemas. If the result is unsatisfiable, this
 /// returns `Schema::Bool(false)`.
 pub(crate) fn merge_all(schemas: &[Schema], defs: &BTreeMap<RefKey, Schema>) -> Schema {
@@ -169,9 +238,13 @@ fn merge_schema_object(
         b.const_value.as_ref(),
     )?;
 
-    // We could clean up this schema to eliminate data irrelevant to the
-    // instance type, but logic in the conversion path should already handle
-    // that.
+    // Clean up the schema to eliminate data irrelevant to the instance type.
+    // This is necessary because some schemas may have validation for multiple
+    // types at the same level (e.g., numeric validation on an object type),
+    // and after merging we need to remove irrelevant constraints.
+    let (format, number, string, array, object) =
+        cleanup_irrelevant_validation(instance_type.as_ref(), format, number, string, array, object);
+
     let mut merged_schema = SchemaObject {
         metadata: None,
         instance_type,
@@ -332,7 +405,20 @@ pub(crate) fn try_merge_with_subschemas(
     }
 
     if let Some(one_of) = one_of {
-        let merged_subschemas = try_merge_with_each_subschema(&schema_object, one_of, defs);
+        // Check if the base schema already has a oneOf - if so, we need to
+        // compute the Cartesian product of the two oneOfs
+        let base_one_of = schema_object
+            .subschemas
+            .as_ref()
+            .and_then(|ss| ss.one_of.as_ref());
+
+        let merged_subschemas = if let Some(base_variants) = base_one_of {
+            // Cartesian product: for each base variant and each new variant,
+            // merge them together
+            try_merge_oneof_cartesian_product(base_variants, one_of, defs)
+        } else {
+            try_merge_with_each_subschema(&schema_object, one_of, defs)
+        };
 
         match merged_subschemas.len() {
             0 => return Err(()),
@@ -411,6 +497,32 @@ fn try_merge_with_each_subschema(
         .collect::<Vec<_>>();
 
     joined_schemas
+}
+
+/// Compute the Cartesian product of two oneOf schemas. For each combination
+/// of a variant from the first oneOf and a variant from the second oneOf,
+/// merge them together. This is used when we have `allOf: [oneOf[A,B], oneOf[C,D]]`
+/// which should produce `oneOf[A∩C, A∩D, B∩C, B∩D]`.
+fn try_merge_oneof_cartesian_product(
+    base_variants: &[Schema],
+    new_variants: &[Schema],
+    defs: &BTreeMap<RefKey, Schema>,
+) -> Vec<Schema> {
+    let mut result = Vec::new();
+
+    for base_variant in base_variants {
+        for new_variant in new_variants {
+            // Try to merge each pair of variants
+            if let Ok(merged) = try_merge_schema(base_variant, new_variant, defs) {
+                // Only include if the merge produced a satisfiable schema
+                if merged != Schema::Bool(false) {
+                    result.push(merged);
+                }
+            }
+        }
+    }
+
+    result
 }
 
 fn merge_schema_not(
