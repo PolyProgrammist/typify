@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "MyStruct": {
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "properties": {
+                  "myfirsttag": {
+                    "enum": [
+                      "a"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "myfirsttag"
+                ],
+                "type": "object"
+              },
+              {
+                "format": "uint64",
+                "minimum": 0,
+                "properties": {
+                  "myfirsttag": {
+                    "enum": [
+                      "b"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "myfirsttag"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          {
+            "oneOf": [
+              {
+                "properties": {
+                  "mysecondtag": {
+                    "enum": [
+                      "c"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "mysecondtag"
+                ],
+                "type": "object"
+              },
+              {
+                "format": "uint64",
+                "minimum": 0,
+                "properties": {
+                  "mysecondtag": {
+                    "enum": [
+                      "d"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "mysecondtag"
+                ],
+                "type": "object"
+              }
+            ]
+          }
+        ],
+        "title": "MyStruct",
+        "type": "object"
+      }
+  }
+}

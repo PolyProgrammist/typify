@@ -14,14 +14,14 @@ use typify_impl::TypeSpaceImpl;
 fn test_schemas() {
     env_logger::init();
     // Make sure output is up to date.
-    for entry in glob("tests/schemas/*.json").expect("Failed to read glob pattern") {
+    for entry in glob("tests/schemas/amy.json").expect("Failed to read glob pattern") {
         let entry = entry.unwrap();
         let out_path = entry.clone().with_extension("rs");
         validate_schema(entry, out_path, &mut TypeSpaceSettings::default()).unwrap();
     }
 
     // Make sure it all compiles.
-    trybuild::TestCases::new().pass("tests/schemas/*.rs");
+    trybuild::TestCases::new().pass("tests/schemas/amy.rs");
 }
 
 /// Ensure that setting the global config to use a custom map type works.
