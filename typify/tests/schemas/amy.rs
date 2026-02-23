@@ -126,11 +126,6 @@ pub enum MyStruct {
         mysecondtag: MyStructVariant3Mysecondtag,
     },
 }
-impl ::std::convert::From<&Self> for MyStruct {
-    fn from(value: &MyStruct) -> Self {
-        value.clone()
-    }
-}
 #[doc = "`MyStructVariant0Myfirsttag`"]
 #[doc = r""]
 #[doc = r" <details><summary>JSON schema</summary>"]
@@ -159,11 +154,6 @@ impl ::std::convert::From<&Self> for MyStruct {
 pub enum MyStructVariant0Myfirsttag {
     #[serde(rename = "a")]
     A,
-}
-impl ::std::convert::From<&Self> for MyStructVariant0Myfirsttag {
-    fn from(value: &MyStructVariant0Myfirsttag) -> Self {
-        value.clone()
-    }
 }
 impl ::std::fmt::Display for MyStructVariant0Myfirsttag {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
@@ -232,11 +222,6 @@ pub enum MyStructVariant0Mysecondtag {
     #[serde(rename = "c")]
     C,
 }
-impl ::std::convert::From<&Self> for MyStructVariant0Mysecondtag {
-    fn from(value: &MyStructVariant0Mysecondtag) -> Self {
-        value.clone()
-    }
-}
 impl ::std::fmt::Display for MyStructVariant0Mysecondtag {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
         match *self {
@@ -303,11 +288,6 @@ impl ::std::convert::TryFrom<::std::string::String> for MyStructVariant0Mysecond
 pub enum MyStructVariant1Myfirsttag {
     #[serde(rename = "a")]
     A,
-}
-impl ::std::convert::From<&Self> for MyStructVariant1Myfirsttag {
-    fn from(value: &MyStructVariant1Myfirsttag) -> Self {
-        value.clone()
-    }
 }
 impl ::std::fmt::Display for MyStructVariant1Myfirsttag {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
@@ -376,11 +356,6 @@ pub enum MyStructVariant1Mysecondtag {
     #[serde(rename = "d")]
     D,
 }
-impl ::std::convert::From<&Self> for MyStructVariant1Mysecondtag {
-    fn from(value: &MyStructVariant1Mysecondtag) -> Self {
-        value.clone()
-    }
-}
 impl ::std::fmt::Display for MyStructVariant1Mysecondtag {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
         match *self {
@@ -447,11 +422,6 @@ impl ::std::convert::TryFrom<::std::string::String> for MyStructVariant1Mysecond
 pub enum MyStructVariant2Myfirsttag {
     #[serde(rename = "b")]
     B,
-}
-impl ::std::convert::From<&Self> for MyStructVariant2Myfirsttag {
-    fn from(value: &MyStructVariant2Myfirsttag) -> Self {
-        value.clone()
-    }
 }
 impl ::std::fmt::Display for MyStructVariant2Myfirsttag {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
@@ -520,11 +490,6 @@ pub enum MyStructVariant2Mysecondtag {
     #[serde(rename = "c")]
     C,
 }
-impl ::std::convert::From<&Self> for MyStructVariant2Mysecondtag {
-    fn from(value: &MyStructVariant2Mysecondtag) -> Self {
-        value.clone()
-    }
-}
 impl ::std::fmt::Display for MyStructVariant2Mysecondtag {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
         match *self {
@@ -592,11 +557,6 @@ pub enum MyStructVariant3Myfirsttag {
     #[serde(rename = "b")]
     B,
 }
-impl ::std::convert::From<&Self> for MyStructVariant3Myfirsttag {
-    fn from(value: &MyStructVariant3Myfirsttag) -> Self {
-        value.clone()
-    }
-}
 impl ::std::fmt::Display for MyStructVariant3Myfirsttag {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
         match *self {
@@ -663,11 +623,6 @@ impl ::std::convert::TryFrom<::std::string::String> for MyStructVariant3Myfirstt
 pub enum MyStructVariant3Mysecondtag {
     #[serde(rename = "d")]
     D,
-}
-impl ::std::convert::From<&Self> for MyStructVariant3Mysecondtag {
-    fn from(value: &MyStructVariant3Mysecondtag) -> Self {
-        value.clone()
-    }
 }
 impl ::std::fmt::Display for MyStructVariant3Mysecondtag {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
