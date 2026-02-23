@@ -13,75 +13,6 @@ use schemars::schema::{
 
 use crate::{util::ref_key, validate::schema_value_validate, RefKey};
 
-/// Clean up validation that is irrelevant for the determined instance type.
-/// For example, if the type is definitively "object", we remove numeric
-/// validation since it doesn't apply.
-fn cleanup_irrelevant_validation(
-    instance_type: Option<&SingleOrVec<InstanceType>>,
-    format: Option<String>,
-    number: Option<Box<NumberValidation>>,
-    string: Option<Box<StringValidation>>,
-    array: Option<Box<ArrayValidation>>,
-    object: Option<Box<ObjectValidation>>,
-) -> (
-    Option<String>,
-    Option<Box<NumberValidation>>,
-    Option<Box<StringValidation>>,
-    Option<Box<ArrayValidation>>,
-    Option<Box<ObjectValidation>>,
-) {
-    // If we have a single, definite instance type, remove irrelevant validation
-    let single_type = match instance_type {
-        Some(SingleOrVec::Single(t)) => Some(t.as_ref()),
-        _ => None,
-    };
-
-    match single_type {
-        Some(InstanceType::Object) => {
-            // For objects, remove numeric/string/array validation and numeric formats
-            let clean_format = format.filter(|f| !is_numeric_format(f));
-            (clean_format, None, None, None, object)
-        }
-        Some(InstanceType::Array) => {
-            // For arrays, remove numeric/string/object validation
-            let clean_format = format.filter(|f| !is_numeric_format(f));
-            (clean_format, None, None, array, None)
-        }
-        Some(InstanceType::String) => {
-            // For strings, remove numeric/array/object validation
-            let clean_format = format.filter(|f| !is_numeric_format(f));
-            (clean_format, None, string, None, None)
-        }
-        Some(InstanceType::Integer) | Some(InstanceType::Number) => {
-            // For numbers, remove string/array/object validation
-            (format, number, None, None, None)
-        }
-        _ => {
-            // Multiple types or unknown - keep everything
-            (format, number, string, array, object)
-        }
-    }
-}
-
-/// Check if a format string is a numeric format
-fn is_numeric_format(format: &str) -> bool {
-    matches!(
-        format,
-        "int8"
-            | "int16"
-            | "int32"
-            | "int64"
-            | "int128"
-            | "uint8"
-            | "uint16"
-            | "uint32"
-            | "uint64"
-            | "uint128"
-            | "float"
-            | "double"
-    )
-}
-
 /// Merge all schemas in array of schemas. If the result is unsatisfiable, this
 /// returns `Schema::Bool(false)`.
 pub(crate) fn merge_all(schemas: &[Schema], defs: &BTreeMap<RefKey, Schema>) -> Schema {
@@ -238,13 +169,9 @@ fn merge_schema_object(
         b.const_value.as_ref(),
     )?;
 
-    // Clean up the schema to eliminate data irrelevant to the instance type.
-    // This is necessary because some schemas may have validation for multiple
-    // types at the same level (e.g., numeric validation on an object type),
-    // and after merging we need to remove irrelevant constraints.
-    let (format, number, string, array, object) =
-        cleanup_irrelevant_validation(instance_type.as_ref(), format, number, string, array, object);
-
+    // We could clean up this schema to eliminate data irrelevant to the
+    // instance type, but logic in the conversion path should already handle
+    // that.
     let mut merged_schema = SchemaObject {
         metadata: None,
         instance_type,

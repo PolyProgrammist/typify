@@ -20,8 +20,6 @@
                 "type": "object"
               },
               {
-                "format": "uint64",
-                "minimum": 0,
                 "properties": {
                   "myfirsttag": {
                     "enum": [
@@ -54,8 +52,6 @@
                 "type": "object"
               },
               {
-                "format": "uint64",
-                "minimum": 0,
                 "properties": {
                   "mysecondtag": {
                     "enum": [
